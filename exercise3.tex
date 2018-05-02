@@ -1,0 +1,267 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{tikz-cd}
+\usepackage{cleveref}
+\usetikzlibrary{babel}
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+
+%commands 
+\newcommand{\coker}{\mathsf{coker}}
+\newcommand{\im}{\mathsf{im}}
+
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+		\textsf{\textbf{#1)}}
+	}
+}
+
+\title{Aufgabenblatt 3}
+\author{Philipp Stassen, Claas Latta}
+\begin{document}
+\maketitle
+\aufgabe1
+$\mathsf{(i)\Rightarrow (ii)}$: 
+Gegeben ist die exakte Sequenz
+\begin{figure}[h]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 3em]
+	0
+	\arrow[r,""]
+		&N_1
+		\arrow[r,"f"]
+			&N_2
+			\arrow[r,"g"]
+				&N_3.
+\end{tikzcd}
+\caption{exakte Sequenz}
+\end{figure}\\
+Wir wollen zeigen, dass die folgende Sequenz für alle $A$-Moduln $M$ exakt ist.
+\begin{figure}[h]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 3em]
+	0
+	\arrow[r,""]
+	&\mathrm{Hom}_A(M,N_1)
+		\arrow[r,"f\circ"]
+		&\mathrm{Hom}_A(M,N_2)
+			\arrow[r,"g\circ"]
+			&\mathrm{Hom}_A(M,N_3)
+\end{tikzcd}
+\caption{zu zeigen}
+\end{figure} \\
+Zuerst zeigen wir, dass $f\circ$ \emph{injektiv} ist. Angenommen $f\circ\varphi=0$, dann ist $\im(\varphi)\subseteq\ker(f)=\{0\}$, da $f$ injektiv ist. Also ist $\ker(f\circ)=\{0\}$ und $f\circ$ injektiv.\smallskip
+
+Es bleibt zu zeigen, dass $\im(f\circ)=\ker(g\circ)$. 
+
+\noindent ''$\subseteq$'' Sei $\psi\in\im(f\circ)$. Dann ist $\im(\psi)\subseteq\im(f)=\ker(g)$. Deshalb ist $g\circ \psi =0$ und $\psi\in\ker(g)$.
+
+\noindent ''$\supseteq$'' Sei $\psi\in\ker(g\circ)$, also $g\circ\psi=0$. Dann ist $\im(\psi)\subseteq\ker(g)=\im(f)$. Da $f$ injektiv ist, existiert die Umkehrfunktion, sodass wir $f^{-1}(\psi(m))=:\varphi(m):M\to N_1$ definieren können. Dann ist aber $f\circ\varphi=\psi$ und damit $\psi\in\im(f\circ)$.\qed \medskip
+
+$\mathsf{(i)}\Rightarrow\mathsf{(ii)}$: Sei nun umgekehrt die Sequenz für alle $A$-Moduln M exakt.
+\begin{figure}[h]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 3em]
+	0
+	\arrow[r,""]
+	&\mathrm{Hom}_A(M,N_1)
+		\arrow[r,"f\circ"]
+		&\mathrm{Hom}_A(M,N_2)
+			\arrow[r,"g\circ"]
+			&\mathrm{Hom}_A(M,N_3)
+\end{tikzcd}
+\caption{exakte Sequenz für beliebigen $A$-Modul $M$}
+\end{figure} \\
+Wir wollen zeigen dann auch die Sequenz in \Cref{diagramm:1nichthom} exakt ist.\clearpage
+\begin{figure}[ht]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 3em]
+	0
+	\arrow[r,""]
+		&N_1
+		\arrow[r,"f"]
+			&N_2
+			\arrow[r,"g"]
+				&N_3.
+\end{tikzcd}
+\caption{zu zeigen} \label{diagramm:1nichthom}
+\end{figure}
+
+Zuerst zeigen wir, dass $f$ injektiv ist.
+Wir betrachten die exakte Sequenz für $M=\ker(f)$.
+\begin{figure}[h]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 2em]
+	0
+	\arrow[r,""]
+	&\mathrm{Hom}_A(\ker(f),N_1)
+		\arrow[r,"f\circ"]
+		&\mathrm{Hom}_A(\ker(f),N_2)
+			\arrow[r,"g\circ"]
+			&\mathrm{Hom}_A(\ker(f),N_3)
+\end{tikzcd}
+\end{figure} \\
+Die Einbettung $\iota:\ker(f)\hookrightarrow N_1$ ist ein Homomorphismus. Wenden wir $f\circ$ darauf an, erhalten wir, dass $f\circ\iota=0$. Also ist $\iota=0$, da $f\circ$ nach Annahme injektiv ist. Aufgrund der Injektivität von $\iota$ folgt aus $\iota(\ker(f))=0$, dass bereits $\ker(f)=0$, also ist $f$ injektiv. \medskip
+
+Es bleibt zu zeigen, dass $\im(f)=\ker(g)$\smallskip
+
+\noindent ''$\subseteq$'': Wir betrachten die exakte Sequenz
+\begin{figure}[h]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 2em]
+	0
+	\arrow[r,""]
+	&\mathrm{Hom}_A(N_1,N_1)
+		\arrow[r,"f\circ"]
+		&\mathrm{Hom}_A(N_1,N_2)
+			\arrow[r,"g\circ"]
+			&\mathrm{Hom}_A(N_1,N_3)
+\end{tikzcd}
+\end{figure} \\
+Wir betrachten $\mathsf{id}\in \mathrm{Hom}_A(N_1,N_1)$. Da die Sequenz exakt ist, wissen wir, dass $\im(f\circ)=\ker(g\circ)$. Daraus folgt, dass $g\circ f \circ\mathsf{id}=0$ ist. Also ist auch $g\circ f=0$ und damit $\im(f)\subseteq\ker(g)$. \smallskip
+
+\noindent''$\supseteq$'': 
+\begin{figure}[ht!]
+\centering
+\begin{tikzcd}[row sep=3em, column sep = 2em]
+	0
+	\arrow[r,""]
+	&\mathrm{Hom}_A(\ker(g),N_1)
+		\arrow[r,"f\circ"]
+		&\mathrm{Hom}_A(\ker(g),N_2)
+			\arrow[r,"g\circ"]
+			&\mathrm{Hom}_A(\ker(g),N_3)
+\end{tikzcd}
+\end{figure} \\
+Es sei $\iota:\ker(g)\hookrightarrow N_2$, dann ist $g\circ\iota =0$ und damit $\iota\in\ker(g\circ)=\im(f\circ)$. Da $\iota\in\im(f\circ)$ ist, existiert ein $\varphi\in\mathrm{Hom}_A(\ker(g),N_2)$, sodass $f\circ \varphi =\iota$.
+Sei nun $x\in\ker(g)$, dann ist $x=\iota(x)=f(\varphi(x))\in\im(f)$. Also ist $\ker(g)\subseteq\im(f)$. 
+
+\aufgabe2
+\teilaufgabe{i} Es sei $A$ ein Ring, $I\subseteq A$ ein Ideal und $M$ ein $A$-Modul. Wir wollen zeigen, dass $M/IM\cong (A/I)\otimes_A M$.
+
+Dazu definieren wir die Abbildungen
+\begin{align}
+	\Phi:M/IM\to(A/I)\otimes_A M \\
+	[m]_{M/IM}\mapsto [1]_{A/I}\otimes_A m
+\end{align}
+und 
+\begin{align}
+	\Psi:(A/I)\otimes_A M\to M/IM\\
+	[a]_{A/I}\otimes_A m \mapsto [a\cdot m]_{M/IM}
+\end{align}
+Die Abbildungen sind $A$-linear.
+ Die Abbildungen sind invers zueinander:
+ \begin{align}
+	 \Psi\circ\Phi([m])=\Psi([1]\otimes_Am)=[1\cdot m]=[m] \\
+	 \Phi\circ\Psi([a]\otimes_Am)=\Phi[A\cdot m]=[1]\otimes_Aa\cdot m=[a]\otimes_A m
+ \end{align} \qed
+
+ \teilaufgabe{ii}
+Sei $A$ ein Ring, $I,J\subseteq A$ Ideale, dann ist $A/I\otimes_A A/J\cong A/I+J$.
+\begin{proof}
+	Wir definieren die Abbildungen
+	\begin{align}
+		\Phi:A/I\otimes_AA/J\to A/I+J \\
+		[a]_I\otimes_A[a']_J\mapsto [a\cdot a']_{I+J}
+	\end{align}
+und die Umkehrung 
+\begin{align}
+	\Psi:A/I+J\to A/I\otimes_AA/J\\
+	[a]_{I+J}\mapsto[1]_I\otimes_A[a]_J
+\end{align}
+$\Psi$ ist wohldefiniert, da 
+\begin{align}
+	\Psi([a+i])\mapsto[1]\otimes_A[a+i]_J&=[1]_I\otimes_A[a]+[1]_I\otimes_A[i]_J\\ 
+					     &=[1]_I\otimes_A[a]+[i]_I\otimes_A[1]_J\\
+					     &=[1]_I\otimes_A[a]+[0]_I\otimes_A[1]_J\\
+					     &=[1]_I\otimes_A[a] 
+					     = \Psi([a])
+\end{align}
+Beide Abbildungen sind $A$-linear.
+Die Abbildungen sind invers zeinander, da
+\begin{align}
+	\Phi\circ\Psi ([a])=\Phi([1]\otimes_A[a])=[1\cdot a]=[a] \\
+	\Psi\circ\Phi([a]\otimes_A[a'])=\Psi([a\cdot a'])=[1]\otimes_A [a\cdot a']=[a]\otimes_A [a']
+\end{align}
+\end{proof}
+
+\teilaufgabe{iii}
+Sei $A$ Ring, $B$ eine $A$-Algebra, $M$ ein $A$-Modul und $N$ ein $B$-Modul. Wir wollen zeigen, dass $N\otimes_A M\cong N\otimes_B(B\otimes_AM)$.
+\begin{proof}
+	Wir definieren die Abbildungen
+	\begin{align}
+		\Phi:N\otimes_A M\to N\otimes_B(B\otimes_A M) \\
+		\Phi(n\otimes_A m):=n\otimes_B(1\otimes_Am)
+	\end{align}
+und 
+\begin{align}
+	\Psi:N\otimes_B(B\otimes_A M)\to N\otimes_A M\\
+	\Psi(n\otimes_B(b\otimes_Am)):=b\cdot n \otimes_A m
+\end{align}
+Diese Abbildungen sind $B$-linear und invers zueinander. Die $B$-Linearität folgt aus dem Satz 3.12 der Vorlesung. Die beiden Abbildungen sind invers zueinander, da
+\begin{align}
+	\Phi\circ\Psi(n\otimes_B(b\otimes_Am))=\Phi(b\cdot n\otimes_Am)=b\cdot n\otimes_B(1\otimes_A m) =n\otimes_B(b\otimes_Am) \\
+	\Psi\circ\Phi(n\otimes_A m)=\Psi(n\otimes_B(1\otimes_A m))=n\otimes_A m
+\end{align}
+\end{proof}
+\teilaufgabe{iv}
+Sei $A$ ein Ring, $M$ ein $A$-Modul. Der Polynomring 
+\begin{align}
+	M[X]=\{\sum_{i=0}^nm_ix^i|n\in\mathbb{N},m_i\in M\}
+\end{align}
+wird mit der Multiplikation
+\begin{align}
+	M[X]\times A[X]\to M[X] \\
+	(P_M,P_A)\mapsto P_M\cdot P_A
+\end{align}
+zu einem $A[X]$-Modul.
+Wir wollen zeigen, dass $M[X]\cong A[X]\otimes_A M$.
+\begin{proof}
+	Wir definieren die Abbildungen
+	\begin{align}
+		\Phi:M[x]\to A[X]\otimes_A M \\
+		\Phi(P_M)=\sum_{i=0}^n x^i\otimes_A m_i
+	\end{align}
+	 und 
+	 \begin{align}
+		 \Psi:(A[X]\otimes_A M)\to M[X] \\
+		 \Psi(P_A\otimes_A m)=P_A\cdot m
+	 \end{align}
+	 Die Abbildung $\Psi$ ist so definiert, dass sie $A$-linear ist.
+	Die Abbildungen sind invers zueinander
+	\begin{align}
+		\Phi\circ\Psi(P_A\otimes_A m)=\Phi(P_A\cdot m)=\sum_{i=0}^n x^i\otimes_A a_i\cdot m &=\sum a_i\cdot x^i\otimes_A m \\
+		&= P_A\otimes_A m
+	\end{align}
+	\begin{align}
+		\Psi\circ\Phi(P_M)=\Psi(\sum_{i=0}^n x^i\otimes_A m_i)=\sum_{i=0}^n \Psi(x^i\otimes_A m_i)=\sum x^i\cdot m_i=P_M
+	\end{align}
+\end{proof}
+\end{document}
+

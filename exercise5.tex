@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools,sansmath}
+\usepackage{tikz-cd}
+\usepackage{cleveref}
+\usetikzlibrary{babel}
+
+%Umgebungen
+\newtheorem{thm}{Theorem}[section] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{Korollar}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{propo}[thm]{Proposition}
+\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+%commands 
+\newcommand{\coker}{\mathsf{coker}}
+\newcommand{\im}{\mathsf{im}}
+\newcommand{\claim}{\textsf{Behauptung}:\hspace{0,2cm}}
+
+%Aufgaben-Command
+\newcommand{\aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+
+	}
+}
+%Teilaufgabe
+\newcommand{\teilaufgabe}[1]{
+	{
+		\vspace*{0.2cm}
+		\textsf{\textbf{#1)}}
+	}
+}
+
+\title{Aufgabenblatt 5}
+\author{Philipp Stassen, Claas Latta}
+\begin{document}
+\maketitle
+\aufgabe1
+Sei $A$ ein Hauptidealring, $M$ ein endlich erzeugter $A$-Modul und
+\begin{align}
+	A^{r'}\oplus\bigoplus_{i=1}^{m}\bigoplus_{j=1}^{k_i}A/(q_i^{t_{ij}})\cong M \cong A^{r}\oplus\bigoplus_{i=1}^{n}\bigoplus_{j=1}^{l_i}A/(p_i^{s_{ij}})
+\end{align}
+mit $p_1,...,p_m,q_1,..,q_m\in A$ prim und $1\leq s_{i1}\leq ...\leq s_{il_i}$ resp. $1\leq t_{i1}\leq ...\leq t_{ik_i}$.
+
+\teilaufgabe{i} Wir wollen zeigen, dass $r=r'$ 
+\begin{proof}
+Es ist $M_{tor}\cong\bigoplus_{i=1}^{m}\bigoplus_{j=1}^{k_i}A/(q_i^{t_{ij}})$, denn 
+\begin{align}
+	\prod_{i=1}^mq_i^{t_{ik_i}}\in\mathrm{Ann}_A\left(\bigoplus_{i=1}^{m}\bigoplus_{j=1}^{k_i}A/(q_i^{t_{ij}})\right)
+\end{align}
+ und $A^r$ ist frei, da $A$ ein Integritätsbereich ist.
+ Also ist $A^{r'}\cong M/M_{tor}\cong A^r$. Nun folgt von Übungsblatt 3 Aufgabe 4, dass $r=r'$.
+ \end{proof}
+
+ \teilaufgabe{ii} \claim Bis auf Permutation der $q_i$ gilt, dass $p_i$ zu $q_i$ assoziiert ist. Insbesondere gilt dann $m=n$. 
+ \begin{proof}
+	 Es ist $M(q_i)\cong \bigoplus_{j=1}^{k_i}A/(q_i^{t_{ij}})$. Zu jedem $i$ haben wir den Annulator $a=q_i^{t_{ik_i}}\in \mathrm{Ann}_A(M(q_i))$. Für $m\in M(q_i)$ und $\varphi\in \mathrm{Aut}(M)$ muss also gelten, dass $0=\varphi(a\cdot m)=a\cdot \varphi(m)$. Also ist $a\in \mathrm{Ann}(\varphi(M(q_i)))$. 
+
+	 Da $q_i$ prim ist, folgt aus $q_{i}^{t_{ik_i}}=a=p_{i}^{t_{il_i}}$ bereits, dass $q_i$ assoziiert zu $p_i$ ist. 
+ \end{proof}
+ \teilaufgabe{iii} \claim Ist $p_i$ assoziiert zu $q_i$, dann ist $s_{ij}=t_{ij}$ für alle $j$.
+\begin{proof}
+	Vermöge Teilaufgabe ii) wissen wir, dass $\varphi(M(q_i))=M(p_i)$. Es genügt also die Aussage für einen primären Modul zu beweisen.
+	
+	Sei $\bigoplus_{j=1}^kA/(q^{t_{j}})\cong M\cong\bigoplus_{j=1}^lA/(p^{s_{j}})$ mit dem Isomorphismus 
+	\begin{align}
+		\varphi:\bigoplus_{j=1}^kA/(q^{t_{j}})\to \bigoplus_{j=1}^lA/(p^{s_{j}}).
+	\end{align} 
+	Wir wissen, dass 
+	\begin{align}
+		(q^{t_k})= \mathrm{Ann}(M)= (p^{s_l}).
+	\end{align}
+	Deshalb folgt, dass $t_k = s_l$. Desweiteren induziert $\varphi$ einen Isomorphismus 
+	\begin{align}
+		M/(A/q^{t_k})\cong \bigoplus_{j=1}^{k-1}A/(q^{t_{j}})\cong \bigoplus_{j=1}^{l-1}A/(p^{s_{j}})\cong N/(A/p^{s_l}).
+	\end{align}
+	Wir iterieren dieses Verfahren und erhalten die Eindeutigkeit der Exponenten.
+	\end{proof}
+\teilaufgabe{iv} \claim Es existieren minimales $d\in\mathbb{N}$ und bis auf Assoziiertheit eindeutige $a_1,...,a_d\in A\backslash\{0\}$ 
+\begin{align}
+	M\cong A^r\oplus\bigoplus_{i=1}^dA/(a_i)
+\end{align}
+und $a_1|a_2|...|a_d$.
+\begin{proof}
+	Nach dem chinesischen Restsatz (siehe Wiki oder irgendein Algebrabuch) ist für teilerfremde $a_1,...,a_n$
+	\begin{align}
+		A/(a_1\cdot ...\cdot a_n)\cong \prod_{i=1}^nA/(a_i)\cong \bigoplus_{i=1}^nA/(a_i)
+	\end{align}
+	Wir definieren 
+	\begin{align}
+		a_d&:=\prod_{i=1}^n p_i^{t_{il_i}} \\
+		a_h&:= \prod_{i=1}^n p_i^{t_{i(l_i-(d-h)}} \text{ für } h<d
+	\end{align}
+	wobei wir definieren, dass $t_{ij}=1$ falls $j\leq 0$.
+	Dann gilt nach dem chinesischen Restsatz
+	\begin{align}
+		A^{r}\oplus\bigoplus_{i=1}^{n}\bigoplus_{j=1}^{l_i}A/(p_i^{s_{ij}})\cong A^{r}\oplus\bigoplus_{i=1}^dA/(a_i),
+	\end{align}
+	wobei $d=\mathrm{max}_{i=1}^n(l_i)$.
+
+	Dass diese Zerlegung eindeutig ist bis auf Assoziiertheit folgt daraus, dass die $p_i$ eindeutig sind bis auf Assoziiertheit. Es ist nach Konstruktion klar, dass $a_1|a_2|...|a_d|$.
+\end{proof}
+\end{document}
